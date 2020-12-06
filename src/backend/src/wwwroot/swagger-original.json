@@ -1,0 +1,77 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "Documentation of all Api-Calls the SmartHome Backend can handle.",
+    "version" : "1.0.0",
+    "title" : "SmartHomeApi"
+  },
+  "basePath" : "/v1",
+  "tags" : [ {
+    "name" : "Temperature",
+    "description" : "all Api-Call regarding Temperature Data"
+  } ],
+  "schemes" : [ "http", "https" ],
+  "consumes" : [ "application/json", "application/x-www-form-urlencoded" ],
+  "produces" : [ "application/json" ],
+  "paths" : {
+    "/temperature/getCurrentTemperature" : {
+      "get" : {
+        "tags" : [ "Temperature" ],
+        "summary" : "Gets the last emmited Temperature.",
+        "operationId" : "getCurrentTemperature",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/TemperatureData"
+            }
+          }
+        }
+      }
+    },
+    "/temperature/setCurrentTemperature" : {
+      "put" : {
+        "tags" : [ "Temperature" ],
+        "summary" : "Emmit a change in the current temperature",
+        "operationId" : "setCurrentTemperature",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Pet object that needs to be added to the store",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/TemperatureData"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "TemperatureData" : {
+      "type" : "object",
+      "properties" : {
+        "valueC" : {
+          "type" : "number"
+        },
+        "valueF" : {
+          "type" : "number"
+        },
+        "timeStamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      },
+      "example" : {
+        "valueF" : 6.02745618307040320615897144307382404804229736328125,
+        "timeStamp" : "2000-01-23T04:56:07.000+00:00",
+        "valueC" : 0.80082819046101150206595775671303272247314453125
+      }
+    }
+  }
+}
