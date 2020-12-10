@@ -40,12 +40,6 @@ namespace IO.Swagger.Models
         public decimal? ValueF { get; set; }
 
         /// <summary>
-        /// Gets or Sets TimeStamp
-        /// </summary>
-        [DataMember(Name="timeStamp")]
-        public DateTime? TimeStamp { get; set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -55,7 +49,6 @@ namespace IO.Swagger.Models
             sb.Append("class TemperatureData {\n");
             sb.Append("  ValueC: ").Append(ValueC).Append("\n");
             sb.Append("  ValueF: ").Append(ValueF).Append("\n");
-            sb.Append("  TimeStamp: ").Append(TimeStamp).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -101,11 +94,6 @@ namespace IO.Swagger.Models
                     ValueF == other.ValueF ||
                     ValueF != null &&
                     ValueF.Equals(other.ValueF)
-                ) && 
-                (
-                    TimeStamp == other.TimeStamp ||
-                    TimeStamp != null &&
-                    TimeStamp.Equals(other.TimeStamp)
                 );
         }
 
@@ -123,8 +111,6 @@ namespace IO.Swagger.Models
                     hashCode = hashCode * 59 + ValueC.GetHashCode();
                     if (ValueF != null)
                     hashCode = hashCode * 59 + ValueF.GetHashCode();
-                    if (TimeStamp != null)
-                    hashCode = hashCode * 59 + TimeStamp.GetHashCode();
                 return hashCode;
             }
         }

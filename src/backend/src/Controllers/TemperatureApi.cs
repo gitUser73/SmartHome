@@ -19,6 +19,7 @@ using IO.Swagger.Attributes;
 
 using Microsoft.AspNetCore.Authorization;
 using IO.Swagger.Models;
+using backend.src.Services;
 
 namespace IO.Swagger.Controllers
 { 
@@ -28,6 +29,13 @@ namespace IO.Swagger.Controllers
     [ApiController]
     public class TemperatureApiController : ControllerBase
     { 
+		private readonly TemperatureService _temperatureService;
+
+		public TemperatureApiController(TemperatureService temperatureService)
+		{
+			_temperatureService = temperatureService;
+		}
+
         /// <summary>
         /// Gets the last emmited Temperature.
         /// </summary>
@@ -40,17 +48,10 @@ namespace IO.Swagger.Controllers
         [SwaggerResponse(statusCode: 200, type: typeof(TemperatureData), description: "OK")]
         public virtual IActionResult GetCurrentTemperature()
         { 
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(TemperatureData));
-
-            string exampleJson = null;
-            exampleJson = "{\n  \"valueF\" : 6.02745618307040320615897144307382404804229736328125,\n  \"timeStamp\" : \"2000-01-23T04:56:07.000+00:00\",\n  \"valueC\" : 0.80082819046101150206595775671303272247314453125\n}";
             
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<TemperatureData>(exampleJson)
-            : default(TemperatureData);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
+            var data = _temperatureService.getCurrentTemperature();
+
+            return new ObjectResult(data);
         }
 
         /// <summary>
@@ -67,7 +68,7 @@ namespace IO.Swagger.Controllers
         { 
             //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
             // return StatusCode(200);
-
+            _temperatureService.setCurrentTemperature(body);
 
             throw new NotImplementedException();
         }
