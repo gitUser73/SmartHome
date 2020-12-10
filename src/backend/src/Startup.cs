@@ -23,7 +23,8 @@ using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using IO.Swagger.Filters;
-
+using backend.src.Services.Interfaces;
+using backend.src.Services;
 
 namespace IO.Swagger
 {
@@ -66,6 +67,8 @@ namespace IO.Swagger
                     opts.SerializerSettings.Converters.Add(new StringEnumConverter(new CamelCaseNamingStrategy()));
                 })
                 .AddXmlSerializerFormatters();
+
+            services.AddScoped<ITemperatureService, TemperatureService>();
 
 
             services

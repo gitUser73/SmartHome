@@ -20,6 +20,7 @@ using IO.Swagger.Attributes;
 using Microsoft.AspNetCore.Authorization;
 using IO.Swagger.Models;
 using backend.src.Services;
+using backend.src.Services.Interfaces;
 
 namespace IO.Swagger.Controllers
 { 
@@ -29,9 +30,9 @@ namespace IO.Swagger.Controllers
     [ApiController]
     public class TemperatureApiController : ControllerBase
     { 
-		private readonly TemperatureService _temperatureService;
+		private readonly ITemperatureService _temperatureService;
 
-		public TemperatureApiController(TemperatureService temperatureService)
+		public TemperatureApiController(ITemperatureService temperatureService)
 		{
 			_temperatureService = temperatureService;
 		}
@@ -50,7 +51,7 @@ namespace IO.Swagger.Controllers
         { 
             
             var data = _temperatureService.getCurrentTemperature();
-
+            
             return new ObjectResult(data);
         }
 
@@ -70,7 +71,7 @@ namespace IO.Swagger.Controllers
             // return StatusCode(200);
             _temperatureService.setCurrentTemperature(body);
 
-            throw new NotImplementedException();
+            return Ok();
         }
     }
 }
