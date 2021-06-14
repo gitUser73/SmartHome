@@ -1,4 +1,3 @@
-Bridge mqtt:broker:_MqttBroker "_MqttBroker" [ host="192.168.178.67", secure=false ] {
+Bridge mqtt:broker:_MqttBroker "_DasHabenwirgeradegemacht" [ host="192.168.178.67", secure=false ] {
 }
-
 Thing example:thing:id "_Thing Label" (mqtt:broker:_MqttBroker) @ "blablabla" [ config="example" ]
